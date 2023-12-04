@@ -1,87 +1,45 @@
-let boom = new Audio("sounds/boom.wav");
-let clap = new Audio("sounds/clap.wav");
-let hihat = new Audio("sounds/hihat.wav");
-let kick = new Audio("sounds/kick.wav");
-let openhat = new Audio("sounds/openhat.wav");
-let ride = new Audio("sounds/ride.wav");
-let snare = new Audio("sounds/snare.wav");
-let tink = new Audio("sounds/tink.wav");
-let tom = new Audio("sounds/tom.wav");
+let sounds = [
+  { name: "Boom", key: "A", sound: new Audio("sounds/boom.wav") },
 
-let buttons = document.querySelectorAll(".noteButton");
-let buttonA = document.getElementById("a");
-let buttonS = document.getElementById("s");
-let buttonD = document.getElementById("d");
-let buttonF = document.getElementById("f");
-let buttonG = document.getElementById("g");
-let buttonH = document.getElementById("h");
-let buttonJ = document.getElementById("j");
-let buttonK = document.getElementById("k");
-let buttonL = document.getElementById("l");
+  { name: "Clap", key: "S", sound: new Audio("sounds/clap.wav") },
 
-document.addEventListener("keydown", (event) => {
-  if (event.code == "KeyA") {
-    boom.currentTime = 0;
-    boom.play();
-    buttonA.classList.add("playing");
-  } else if (event.code == "KeyS") {
-    clap.currentTime = 0;
-    clap.play();
-    buttonS.classList.add("playing");
-  } else if (event.code == "KeyD") {
-    kick.currentTime = 0;
-    kick.play();
-    buttonD.classList.add("playing");
-  } else if (event.code == "KeyF") {
-    openhat.currentTime = 0;
-    openhat.play();
-    buttonF.classList.add("playing");
-  } else if (event.code == "KeyG") {
-    boom.currentTime = 0;
-    boom.play();
-    buttonG.classList.add("playing");
-  } else if (event.code == "KeyH") {
-    ride.currentTime = 0;
-    ride.play();
-    buttonH.classList.add("playing");
-  } else if (event.code == "KeyJ") {
-    snare.currentTime = 0;
-    snare.play();
-    buttonJ.classList.add("playing");
-  } else if (event.code == "KeyK") {
-    tom.currentTime = 0;
-    tom.play();
-    buttonK.classList.add("playing");
-  } else if (event.code == "KeyL") {
-    tink.currentTime = 0;
-    tink.play();
-    buttonL.classList.add("playing");
-  }
-});
+  { name: "Hihat", key: "D", sound: new Audio("sounds/hihat.wav") },
 
-document.addEventListener("keyup", (event) => {
-  if (event.code == "KeyA") {
-    buttonA.classList.remove("playing");
-  } else if (event.code == "KeyS") {
-    buttonS.classList.remove("playing");
-  } else if (event.code == "KeyD") {
-    buttonD.classList.remove("playing");
-  } else if (event.code == "KeyF") {
-    buttonF.classList.remove("playing");
-  } else if (event.code == "KeyG") {
-    buttonG.classList.remove("playing");
-  } else if (event.code == "KeyH") {
-    buttonH.classList.remove("playing");
-  } else if (event.code == "KeyJ") {
-    buttonJ.classList.remove("playing");
-  } else if (event.code == "KeyK") {
-    buttonK.classList.remove("playing");
-  } else if (event.code == "KeyL") {
-    buttonL.classList.remove("playing");
-  }
-});
+  { name: "Kick", key: "F", sound: new Audio("sounds/kick.wav") },
 
-function removeTransition(e) {
-  console.log(e);
+  { name: "Openhat", key: "G", sound: new Audio("sounds/opehnat.wav") },
+
+  { name: "Ride", key: "H", sound: new Audio("sounds/ride.wav") },
+
+  { name: "Snare", key: "J", sound: new Audio("sounds/snare.wav") },
+
+  { name: "Tink", key: "K", sound: new Audio("sounds/tink.wav") },
+
+  { name: "Tom", key: "L", sound: new Audio("sounds/tom.wav") },
+];
+
+for (let i = 0; i < sounds.length; i++) {
+  let wrapper = document.querySelector(".wrapper");
+
+  let noteBlock = document.createElement("div");
+  noteBlock.classList.add("noteButton");
+  noteBlock.classList.add(`button${sounds[i].key}`);
+  noteBlock.innerText = sounds[i].key;
+
+  let noteText = document.createElement("div");
+  noteText.innerText = sounds[i].name;
+
+  noteBlock.appendChild(noteText);
+  wrapper.appendChild(noteBlock);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.code == `Key${sounds[i].key}`) {
+      sounds[i].sound.currentTime = 0;
+      sounds[i].sound.play();
+      noteBlock.classList.add("playing");
+      noteBlock.style.animation = "none";
+      noteBlock.offsetHeight;
+      noteBlock.style.animation = null;
+    }
+  });
 }
-buttons.addEventListener("transitionend", removeTransition());
