@@ -76,13 +76,18 @@ body {
   text-transform: uppercase;
   font-family: "Amatic SC", cursive;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
-  padding: 100px 0 100px 0;
   font-size: 2em;
+  transition: 0.4s;
 }
 .panel p:nth-child(2) {
-  font-size: 2em;
+  font-size: 4em;
 }
 
 .panel.open {
   font-size: 40px;
+}
+
+.middleText {
+  padding: 500px 0 500px 0;
+  font-size: 2em !important;
 }
